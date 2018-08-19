@@ -119,7 +119,7 @@ public enum Scope {
 	/**
 	 * Read nonpublic user information, like email address.
 	 */
-	USER_READ,
+	USER_READ("user_read"),
 	/**
 	 * Read a user’s subscriptions.
 	 */

@@ -32,7 +32,7 @@ public class Game {
 	@Data
 	@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	private class GameBox {
+	public class GameBox {
 		private String large;
 		private String medium;
 		private String small;
@@ -42,7 +42,7 @@ public class Game {
 	@Data
 	@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	private class GameLogo {
+	public class GameLogo {
 		private String large;
 		private String medium;
 		private String small;

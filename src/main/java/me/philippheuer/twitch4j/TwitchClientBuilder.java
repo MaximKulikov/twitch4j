@@ -75,7 +75,7 @@ public class TwitchClientBuilder {
 	public TwitchClient build() {
 		// Reqired Parameters
 		Assert.notNull(clientId, "You need to provide a client id!");
-		Assert.notNull(clientSecret, "You need to provide a client secret!");
+		//Assert.notNull(clientSecret, "You need to provide a client secret!");
 
 		final TwitchClient client = new TwitchClient(clientId, clientSecret);
 		client.getCredentialManager().provideTwitchClient(client);

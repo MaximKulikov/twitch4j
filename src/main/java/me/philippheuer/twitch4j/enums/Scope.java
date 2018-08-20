@@ -3,6 +3,7 @@ package me.philippheuer.twitch4j.enums;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -62,12 +63,14 @@ public enum Scope {
 	CHANNEL_EDITOR,
 	/**
 	 * Add posts and reactions to a channel feed.
+	 *
 	 * @deprecated <a href="https://discuss.dev.twitch.tv/t/how-the-removal-of-channel-feed-and-pulse-affects-the-twitch-api-v5/16540">Twitch removes Channel Feed and Pulse.</a>
 	 */
 	@Deprecated
 	CHANNEL_FEED_EDIT,
 	/**
 	 * View a channel feed.
+	 *
 	 * @deprecated <a href="https://discuss.dev.twitch.tv/t/how-the-removal-of-channel-feed-and-pulse-affects-the-twitch-api-v5/16540">Twitch removes Channel Feed and Pulse.</a>
 	 */
 	@Deprecated
@@ -119,7 +122,7 @@ public enum Scope {
 	/**
 	 * Read nonpublic user information, like email address.
 	 */
-	USER_READ("user_read"),
+	USER_READ,
 	/**
 	 * Read a user’s subscriptions.
 	 */
@@ -152,9 +155,11 @@ public enum Scope {
 	}
 
 	public static String join(Collection<Scope> scopes) {
-		if (scopes.size() > 0) return scopes.stream().map(Scope::name)
-				.collect(Collectors.joining("+"));
-		else return "";
+		if (scopes.size() > 0) {
+			String str = scopes.stream().map(Scope::name)
+					.collect(Collectors.joining("+"));
+			return str;
+		} else return "";
 	}
 
 	/**

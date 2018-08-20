@@ -2,6 +2,7 @@ package me.philippheuer.twitch4j.enums;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -151,7 +152,9 @@ public enum Scope {
 	 * @return <code>{@link String}</code> representing '+' separated list of <code>{@link Scope}</code>
 	 */
 	public static String join(Scope... scopes) {
-		return join(Arrays.asList(scopes));
+		List<Scope> scopes1 = Arrays.asList(scopes);
+		String str = join(scopes1);
+		return str;
 	}
 
 	public static String join(Collection<Scope> scopes) {

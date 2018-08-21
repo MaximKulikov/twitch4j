@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
+
 import lombok.Getter;
 import lombok.Setter;
 import me.philippheuer.twitch4j.auth.model.OAuthCredential;
@@ -47,7 +48,7 @@ public class OAuthHandler {
 	 * @return The address of the local web server used for auth handling.
 	 */
 	public String getServerBaseAddress() {
-		return String.format("http://127.0.0.1:%s/authorize.html", getLocalPort().toString());
+		return "http://127.0.0.1:23522/authorize.html";
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class OAuthHandler {
 										String responseState = ctx.getRequest().getQueryParams().get("state");
 
 										// Get Request from Cache
-										if(!getCredentialManager().getOAuthRequestCache().containsKey(responseState)) {
+										if (!getCredentialManager().getOAuthRequestCache().containsKey(responseState)) {
 											ctx.render("Timeout! Please retry!");
 										}
 										OAuthRequest request = getCredentialManager().getOAuthRequestCache().get(responseState);
@@ -127,7 +128,7 @@ public class OAuthHandler {
 					public void run() {
 						// RatpackServer: Stop
 						try {
-							if(ratpackServer.isRunning()) {
+							if (ratpackServer.isRunning()) {
 								ratpackServer.stop();
 							}
 						} catch (Exception ex) {

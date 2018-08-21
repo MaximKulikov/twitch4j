@@ -29,7 +29,7 @@ public class OAuthHandler {
 	 * Port for local webserver
 	 * Will be used to recieve oauth redirect.
 	 */
-	private Integer localPort = 7090;
+	private Integer localPort = 23522;
 
 	/**
 	 * Class Constructor

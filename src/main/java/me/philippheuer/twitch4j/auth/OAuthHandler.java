@@ -47,7 +47,7 @@ public class OAuthHandler {
 	 * @return The address of the local web server used for auth handling.
 	 */
 	public String getServerBaseAddress() {
-		return String.format("http://127.0.0.1:%s", getLocalPort().toString());
+		return String.format("http://127.0.0.1:%s/authorize.html", getLocalPort().toString());
 	}
 
 	/**

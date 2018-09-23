@@ -63,7 +63,7 @@ public class TwitchClientBuilder {
 	/**
 	 * Listener Port
 	 */
-	private final Integer localPort = 23522;
+	private Integer localPort = 23522;
 
 	/**
 	 * Initializing builder

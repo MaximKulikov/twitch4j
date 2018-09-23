@@ -73,10 +73,11 @@ public class OAuthTwitch {
 	 * @return String    Redirect Uri
 	 */
 	public String getRedirectUri() {
-		return String.format("%s/%s",
+		return getCredentialManager().getOAuthHandler().getServerBaseAddress();
+		/*return String.format("%s/%s",
 				getCredentialManager().getOAuthHandler().getServerBaseAddress(),
 				REDIRECT_KEY
-		);
+		);*/
 	}
 
 	/**

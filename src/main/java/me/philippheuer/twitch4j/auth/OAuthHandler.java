@@ -1,5 +1,6 @@
 package me.philippheuer.twitch4j.auth;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,6 +11,8 @@ import lombok.Setter;
 import me.philippheuer.twitch4j.auth.model.OAuthCredential;
 import me.philippheuer.twitch4j.auth.model.OAuthRequest;
 import me.philippheuer.twitch4j.enums.Scope;
+import ratpack.handling.Context;
+import ratpack.handling.Handler;
 import ratpack.server.RatpackServer;
 import ratpack.server.Stopper;
 
@@ -64,6 +67,7 @@ public class OAuthHandler {
 			ratpackServer = RatpackServer.of(s -> s
 					.serverConfig(c -> c
 							.port(getLocalPort())
+							.baseDir(Paths.get(Object.class.getResource("/ratpack").toURI()))
 					)
 					.handlers(c -> c
 							.get(ctx -> ctx.render("Local OAuth Listener ..."))
@@ -71,6 +75,7 @@ public class OAuthHandler {
 							.get(OAuthTwitch.REDIRECT_KEY,
 									ctx -> {
 										// Parse Parameters
+
 										String responseCode = ctx.getRequest().getQueryParams().get("code");
 										String responseScope = ctx.getRequest().getQueryParams().get("scope");
 										String responseState = ctx.getRequest().getQueryParams().get("state");
@@ -113,6 +118,12 @@ public class OAuthHandler {
 										});
 									}
 							)
+							.get("demo", new Handler() {
+								@Override
+								public void handle(Context ctx) throws Exception {
+									ctx.render(ctx.file("index.html"));
+								}
+							})
 					)
 			);
 

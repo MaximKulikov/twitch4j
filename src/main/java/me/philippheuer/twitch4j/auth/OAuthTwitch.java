@@ -38,25 +38,15 @@ public class OAuthTwitch {
 		setCredentialManager(credentialManager);
 	}
 
-	/**
-	 * @param type         Type for Permission for the CredentialManager (IRC/CHANNEL)
-	 * @param twitchScopes Scope to request.
-	 */
-	public void requestPermissionsFor(String type, Scope... twitchScopes) {
-		// Ensures that the listener runs, if permissions are requested
-		getCredentialManager().getOAuthHandler().onRequestPermission();
+	private String getAuthenticationOAuthImplicitCodeFlowUrl(String state, Scope... scopes) {
 
-		// Store Request Information / Generate Token
-		OAuthRequest request = new OAuthRequest();
-		request.setType(type);
-		request.getOAuthScopes().addAll(Arrays.asList(twitchScopes));
-		getCredentialManager().getOAuthRequestCache().put(request.getTokenId(), request);
-
-		// Get OAuthTwitch URI
-		String requestUrl = getAuthenticationUrl(request.getTokenId(), twitchScopes);
-
-		// Open Authorization Page for User
-		WebsiteUtils.openWebpage(requestUrl);
+		return String.format("%s/oauth2/authorize?client_id=%s&redirect_uri=%s&response_type=%s&scope=%s&state=%s",
+				Endpoints.OAUTH.getURL(),
+				getCredentialManager().getTwitchClient().getClientId(),
+				getRedirectUri(),
+				"token",
+				Scope.join(scopes),
+				state);
 	}
 
 	/**
@@ -164,5 +154,43 @@ public class OAuthTwitch {
 			// Credential was modified.
 			getCredentialManager().onCredentialChanged();
 		}
+	}
+
+	public void requestOAuthImplicitCodeFlowFor(String type, Scope... twitchScopes) {
+		// Ensures that the listener runs, if permissions are requested
+		getCredentialManager().getOAuthHandler().onRequestPermission();
+
+		// Store Request Information / Generate Token
+		OAuthRequest request = new OAuthRequest();
+		request.setType(type);
+		request.getOAuthScopes().addAll(Arrays.asList(twitchScopes));
+		getCredentialManager().getOAuthRequestCache().put(request.getTokenId(), request);
+
+		// Get OAuthTwitch URI
+		String requestUrl = getAuthenticationUrl(request.getTokenId(), twitchScopes);
+
+		// Open Authorization Page for User
+		WebsiteUtils.openWebpage(requestUrl);
+	}
+
+	/**
+	 * @param type         Type for Permission for the CredentialManager (IRC/CHANNEL)
+	 * @param twitchScopes Scope to request.
+	 */
+	public void requestPermissionsFor(String type, Scope... twitchScopes) {
+		// Ensures that the listener runs, if permissions are requested
+		getCredentialManager().getOAuthHandler().onRequestPermission();
+
+		// Store Request Information / Generate Token
+		OAuthRequest request = new OAuthRequest();
+		request.setType(type);
+		request.getOAuthScopes().addAll(Arrays.asList(twitchScopes));
+		getCredentialManager().getOAuthRequestCache().put(request.getTokenId(), request);
+
+		// Get OAuthTwitch URI
+		String requestUrl = getAuthenticationUrl(request.getTokenId(), twitchScopes);
+
+		// Open Authorization Page for User
+		WebsiteUtils.openWebpage(requestUrl);
 	}
 }

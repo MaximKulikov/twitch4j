@@ -30,7 +30,7 @@ public class OAuthHandler {
 	 * Port for local webserver
 	 * Will be used to recieve oauth redirect.
 	 */
-	private Integer localPort = 23522;
+	private Integer localPort;
 
 	/**
 	 * Class Constructor
@@ -48,7 +48,7 @@ public class OAuthHandler {
 	 * @return The address of the local web server used for auth handling.
 	 */
 	public String getServerBaseAddress() {
-		return "http://127.0.0.1:23522/authorize.html";
+		return String.format("http://127.0.0.1:%d/authorize.html", localPort);
 	}
 
 	/**

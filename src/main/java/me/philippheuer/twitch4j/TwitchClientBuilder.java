@@ -61,6 +61,11 @@ public class TwitchClientBuilder {
 	private final Set<Object> listeners = new HashSet<>();
 
 	/**
+	 * Listener Port
+	 */
+	private final Integer localPort = 23522;
+
+	/**
 	 * Initializing builder
 	 * @return Client Builder
 	 */
@@ -80,6 +85,7 @@ public class TwitchClientBuilder {
 		final TwitchClient client = new TwitchClient(clientId, clientSecret);
 		client.getCredentialManager().provideTwitchClient(client);
 		client.getCredentialManager().setSaveCredentials(autoSaveConfiguration);
+		client.getCredentialManager().getOAuthHandler().setLocalPort(localPort);
 		if (configurationDirectory != null) {
 			if (!configurationDirectory.exists()) {
 				configurationDirectory.mkdirs();

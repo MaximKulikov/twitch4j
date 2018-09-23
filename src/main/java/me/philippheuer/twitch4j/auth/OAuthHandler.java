@@ -33,6 +33,11 @@ public class OAuthHandler {
 	private Integer localPort;
 
 	/**
+	 * AuthorizationPage
+	 */
+	private String authorizationPage;
+
+	/**
 	 * Class Constructor
 	 *
 	 * @param credentialManager The Credential Manager.
@@ -48,7 +53,7 @@ public class OAuthHandler {
 	 * @return The address of the local web server used for auth handling.
 	 */
 	public String getServerBaseAddress() {
-		return String.format("http://127.0.0.1:%d/authorize.html", localPort);
+		return String.format("http://127.0.0.1:%d/%s", localPort, authorizationPage);
 	}
 
 	/**

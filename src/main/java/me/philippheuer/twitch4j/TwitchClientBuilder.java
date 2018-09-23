@@ -65,6 +65,8 @@ public class TwitchClientBuilder {
 	 */
 	private Integer localPort = 23522;
 
+	private String authorizationPage = "authorize.html";
+
 	/**
 	 * Initializing builder
 	 * @return Client Builder
@@ -86,6 +88,7 @@ public class TwitchClientBuilder {
 		client.getCredentialManager().provideTwitchClient(client);
 		client.getCredentialManager().setSaveCredentials(autoSaveConfiguration);
 		client.getCredentialManager().getOAuthHandler().setLocalPort(localPort);
+		client.getCredentialManager().getOAuthHandler().setAuthorizationPage(authorizationPage);
 		if (configurationDirectory != null) {
 			if (!configurationDirectory.exists()) {
 				configurationDirectory.mkdirs();

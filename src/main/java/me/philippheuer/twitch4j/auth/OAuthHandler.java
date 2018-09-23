@@ -1,6 +1,5 @@
 package me.philippheuer.twitch4j.auth;
 
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,6 +12,7 @@ import me.philippheuer.twitch4j.auth.model.OAuthRequest;
 import me.philippheuer.twitch4j.enums.Scope;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
+import ratpack.server.BaseDir;
 import ratpack.server.RatpackServer;
 import ratpack.server.Stopper;
 
@@ -67,7 +67,7 @@ public class OAuthHandler {
 			ratpackServer = RatpackServer.of(s -> s
 					.serverConfig(c -> c
 							.port(getLocalPort())
-							.baseDir(Paths.get(Object.class.getResource("/ratpack").toURI()))
+							.baseDir(BaseDir.find("ratpack"))
 					)
 					.handlers(c -> c
 							.get(ctx -> ctx.render("Local OAuth Listener ..."))

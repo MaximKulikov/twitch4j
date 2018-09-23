@@ -168,7 +168,7 @@ public class OAuthTwitch {
 		getCredentialManager().getOAuthRequestCache().put(request.getTokenId(), request);
 
 		// Get OAuthTwitch URI
-		String requestUrl = getAuthenticationUrl(request.getTokenId(), twitchScopes);
+		String requestUrl = getAuthenticationOAuthImplicitCodeFlowUrl(request.getTokenId(), twitchScopes);
 
 		// Open Authorization Page for User
 		WebsiteUtils.openWebpage(requestUrl);
